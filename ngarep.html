@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Bukankah Ini My Istri?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('https://i.pinimg.com/236x/53/79/82/537982c1fd7fbcb9ffcc4f62a213e7a0.jpg') center top no-repeat, 
+                                    url('https://i.pinimg.com/originals/6b/7e/2e/6b7e2e2e4e2e4e2e4e2e4e2e4e2e4e2e.jpg') center center/cover no-repeat;
+            background-blend-mode: lighten;
+            background-color: #3a7bd5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+        .container {
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            padding: 32px 24px 24px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,64,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 320px;
+        }
+        .gambar {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,128,0.12);
+        }
+        .judul {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2356a8;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .button-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        button {
+            padding: 10px 32px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .no-btn {
+            background: #e3eafc;
+            color: #2356a8;
+        }
+        .yes-btn {
+            background: #2356a8;
+            color: #fff;
+        }
+        .yes-btn:active {
+            background: #1a3e7a;
+        }
+        .sadar {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #e53935;
+            margin-top: 48px;
+            text-align: center;
+            animation: pop 0.5s;
+        }
+        @keyframes pop {
+            0% { transform: scale(0.7); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <img class="gambar" src="https://i.pinimg.com/236x/53/79/82/537982c1fd7fbcb9ffcc4f62a213e7a0.jpg" alt="My Istri">
+        <div class="judul" id="judul">Bukankah ini my istri?</div>
+        <div class="button-row" id="button-row">
+            <button class="no-btn">No</button>
+            <button class="yes-btn" id="yes-btn">Yes</button>
+        </div>
+    </div>
+    <script>
+        let yesClick = 0;
+        const yesBtn = document.getElementById('yes-btn');
+        const buttonRow = document.getElementById('button-row');
+        const judul = document.getElementById('judul');
+        const mainContainer = document.getElementById('main-container');
+
+        // Ubah latar belakang menjadi gambar Elaina + overlay biru dengan opacity kecil
+        document.body.style.background = "url('https://anievo.id/wp-content/uploads/2021/10/34uiu53524546.jpg') center center/cover no-repeat";
+        document.body.style.position = "relative";
+        // Tambahkan overlay biru dengan opacity kecil
+        if (!document.getElementById('blue-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.id = 'blue-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(58,123,213,0.25)';
+            overlay.style.zIndex = '-1';
+            document.body.appendChild(overlay);
+        }
+
+        function randomizeButtonOrder() {
+            const buttons = Array.from(buttonRow.children);
+            for (let i = buttons.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                buttonRow.appendChild(buttons[j]);
+                buttons.splice(j, 1);
+            }
+        }
+
+        yesBtn.addEventListener('click', function() {
+            yesClick++;
+            if (yesClick < 3) {
+                randomizeButtonOrder();
+            } else if (yesClick === 3) {
+                mainContainer.innerHTML = `
+                    <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+                        <div class="sadar" style="margin-top:0;">SADAR GOBLOG</div>
+                    </div>
+                `;
+            }
+        });
+
+        // Animasi slide up pada container saat pertama kali dibuka
+        mainContainer.style.transform = 'translateY(40px)';
+        mainContainer.style.opacity = '0';
+        mainContainer.style.transition = 'transform 0.7s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.7s';
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+            mainContainer.style.transform = 'translateY(0)';
+            mainContainer.style.opacity = '1';
+            }, 100);
+        });
+
+        // Animasi pop up pada button saat mouse hover
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+            btn.style.transition = 'transform 0.2s cubic-bezier(.68,-0.55,.27,1.55)';
+            btn.style.transform = 'scale(1.12)';
+            });
+            btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'scale(1)';
+            });
+        });
+        document.querySelector('.no-btn').addEventListener('click', function() {
+            mainContainer.innerHTML = `
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+                    <div style="font-size:2rem;font-weight:bold;color:#43a047;text-align:center;animation:pop 0.5s;">NICE STAY 3D BROTHER</div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
