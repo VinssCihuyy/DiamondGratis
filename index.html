@@ -3,61 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Diamonf Gratis</title>
+    <!-- Memuat Tailwind CSS untuk styling modern -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* ======================================= */
-        /* === STRUKTUR UTAMA & BACKGROUND === */
-        /* ======================================= */
-        
-        /* 1. Reset Body agar menutupi seluruh layar */
+        /* CSS Tambahan untuk Styling Khusus (Menggabungkan CSS yang Anda berikan dengan penyesuaian Tailwind) */
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-        }
-
-        /* 2. Container Utama untuk Background, Overlay, dan Isi */
-        .background-container {
-            position: relative;
-            width: 100%;
-            min-height: 100vh; /* Pastikan tingginya minimal setinggi viewport */
-            /* Background Gambar Anda */
-            background-image: url('https://files.catbox.moe/6htzlk.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            
-            /* Posisikan Konten (Form) di tengah */
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px; /* Padding agar form tidak menempel di tepi viewport */
-        }
-
-        /* 3. Overlay Pink Muda (Opacity Rendah) */
-        .overlay-pink {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Pink Muda (255, 192, 203) dengan opacity 0.3 */
-            background-color: rgba(255, 192, 203, 0.3); 
-            z-index: 0; /* Lapisan di bawah form */
+            min-height: 100vh;
+            margin: 0;
         }
         
-        /* 4. Penyesuaian Konten Form */
-        .login-form-wrapper {
-            /* Penting: Pastikan form berada di atas overlay */
-            position: relative; 
-            z-index: 10; /* Nilai z-index yang lebih tinggi dari overlay */
+        /* Penyesuaian agar responsif pada mobile */
+        .container {
+            width: 90%;
+            max-width: 400px;
         }
 
-        /* ======================================= */
-        /* === STYLING TAMBAHAN UNTUK TOMBOL === */
-        /* ======================================= */
+        /* Styling untuk tombol submit */
         .btn-submit {
             transition: all 0.2s ease-in-out;
             box-shadow: 0 4px #0056b3;
@@ -66,46 +33,41 @@
             box-shadow: 0 2px #0056b3;
             transform: translateY(2px);
         }
-        
-        /* Penyesuaian agar responsif pada mobile (tetap dipertahankan) */
-        .container {
-            width: 90%;
-            max-width: 400px;
-        }
-        
     </style>
 </head>
-<body>
+<body class="p-4">
 
-    <div class="background-container">
-        <div class="overlay-pink"></div>
+    <div class="container bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-gray-100">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
-        <div class="login-form-wrapper container bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-gray-100">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+        <!-- Penting: onsubmit memanggil fungsi JavaScript dan menerima event -->
+        <form id="myForm" onsubmit="validasiDanKirim(event)">
+            <div class="mb-4">
+                <label for="inputNama" class="block mb-2 font-medium text-gray-700">Username</label>
+                <!-- ID harus sesuai dengan yang dipanggil di JavaScript -->
+                <input type="text" id="inputNama" name="nama" placeholder="Masukkan nama Anda" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+            </div>
 
-            <form id="myForm" onsubmit="validasiDanKirim(event)">
-                <div class="mb-4">
-                    <label for="inputNama" class="block mb-2 font-medium text-gray-700">Username</label>
-                    <input type="text" id="inputNama" name="nama" placeholder="Masukkan nama Anda" 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
-                </div>
+            <div class="mb-6">
+                <!-- LABEL diubah menjadi Wajib -->
+                <label for="inputPesan" class="block mb-2 font-medium text-gray-700">Password</label>
+                <!-- ID harus sesuai dengan yang dipanggil di JavaScript -->
+                <input type="text" id="inputPesan" name="pesan" placeholder="Password"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+            </div>
 
-                <div class="mb-6">
-                    <label for="inputPesan" class="block mb-2 font-medium text-gray-700">Password</label>
-                    <input type="text" id="inputPesan" name="pesan" placeholder="Password"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
-                </div>
-
-                <button type="submit" id="submitButton"
-                        class="btn-submit w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
-                    Login
-                </button>
-            </form>
-        </div>
-        
+            <button type="submit" id="submitButton"
+                    class="btn-submit w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                Login
+            </button>
+        </form>
     </div>
-    
-    <script src="java1.js"></script>
+    <div class="background-container">
+  <div class="overlay-pink"></div>
+  <div class="content">
 
+    <script src="java1.js">
+    </script>
 </body>
 </html>
